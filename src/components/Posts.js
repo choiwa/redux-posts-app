@@ -20,13 +20,13 @@ class Posts extends Component {
   }
 
   render() {
-    // map the posts here because calling function outside the render will not change statea and will not render
+    // map the posts here because calling function outside the render will not change state and will not render
     const postItems = this.state.posts.map(post =>
       <div key={post.id}>
         <h3>{post.title}</h3>
         <p>{post.body}</p>
       </div>);
-      
+
     return (
       <div>
         <h1> Posts </h1>
