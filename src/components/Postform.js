@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createPost } from '../actions/postActions'
 
 class Postform extends Component {
   constructor(props) {
@@ -25,16 +28,8 @@ class Postform extends Component {
       body: this.state.body,
     }
 
-    // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-    // The fetch() method can optionally accept a second parameter, an init object that allows you to control a number of different settings
-    fetch('https://jsonplaceholder.typicode.com/posts', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(post),
-    }).then(response => response.json())
-    .then(data => console.log(data));
+    //call action
+    this.props.createPost(post);
   }
 
   render() {
@@ -59,4 +54,8 @@ class Postform extends Component {
   }
 }
 
-export default Postform;
+Postform.propTypes = {
+  createPost: PropTypes.func.isRequired
+};
+
+export default connect(null, {createPost})(Postform);

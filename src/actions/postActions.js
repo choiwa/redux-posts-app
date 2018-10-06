@@ -12,3 +12,24 @@ export const fetchPosts = () => dispatch => {
     })
     );
 }
+
+export const createPost = (postData) => dispatch => {
+  // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+  // The fetch() method can optionally accept a second parameter, an init object that allows you to control a number of different settings
+        console.log('this is posted')
+  fetch('https://jsonplaceholder.typicode.com/posts', {
+
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(postData),
+  })
+  .then(response => response.json())
+  .then(post =>
+    dispatch({
+    type: NEW_POST,
+    payload: post,
+    })
+  );
+}
